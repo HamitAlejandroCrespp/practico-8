@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(float v[], int n);
+void mostrar(float v[], int n);
+void contarTipos(float v[], int n, int &pos, int &neg, int &ceros);
+
+int main() {
+    int n;
+    float v[100];
+
+    cout << "Ingrese la cantidad de elementos (n > 0): ";
+    cin >> n;
+
+    if (n > 0 && n <= 100) {
+        leer(v, n);
+        mostrar(v, n);
+
+        int pos = 0, neg = 0, ceros = 0;
+        contarTipos(v, n, pos, neg, ceros);
+
+        cout << "Positivos: " << pos << endl;
+        cout << "Negativos: " << neg << endl;
+        cout << "Ceros: " << ceros << endl;
+    } else {
+        cout << "Cantidad invalida." << endl;
+    }
+    return 0;
+}
+
+void leer(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese el valor " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(float v[], int n) {
+    cout << "Vector: [ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+void contarTipos(float v[], int n, int &pos, int &neg, int &ceros) {
+    for (int i = 0; i < n; i++) {
+        if (v[i] > 0) pos++;
+        else if (v[i] < 0) neg++;
+        else ceros++;
+    }
+}
