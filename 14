@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(int v[], int n);
+void mostrar(int v[], int n);
+void ordenarBurbuja(int v[], int n);
+
+int main() {
+    int n;
+    int v[100];
+
+    cout << "Ingrese la cantidad de elementos: ";
+    cin >> n;
+
+    if (n > 0 && n <= 100) {
+        leer(v, n);
+        cout << "Vector antes de ordenar: "; mostrar(v, n);
+
+        ordenarBurbuja(v, n);
+
+        cout << "Vector despues de ordenar: "; mostrar(v, n);
+    } else {
+        cout << "Cantidad invalida." << endl;
+    }
+    return 0;
+}
+
+void leer(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese elemento " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(int v[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+void ordenarBurbuja(int v[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (v[j] > v[j + 1]) {
+                int aux = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = aux;
+            }
+        }
+    }
+}
