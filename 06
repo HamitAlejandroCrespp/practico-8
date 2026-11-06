@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(float v[], int n);
+void mostrar(float v[], int n);
+void calcularPromediosTrio(float A[], float P[], int n);
+
+int main() {
+    int n;
+    float A[100], P[100];
+
+    cout << "Ingrese la cantidad de elementos (n >= 3): ";
+    cin >> n;
+
+    if (n >= 3 && n <= 100) {
+        leer(A, n);
+        mostrar(A, n);
+
+        int tamPromedios = n - 2;
+        calcularPromediosTrio(A, P, n);
+
+        cout << "Promedios de tres en tres: ";
+        mostrar(P, tamPromedios);
+    } else {
+        cout << "Cantidad invalida (debe ser n >= 3)." << endl;
+    }
+    return 0;
+}
+
+void leer(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese el valor " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(float v[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+void calcularPromediosTrio(float A[], float P[], int n) {
+    for (int i = 0; i < n - 2; i++) {
+        P[i] = (A[i] + A[i + 1] + A[i + 2]) / 3.0;
+    }
+}
