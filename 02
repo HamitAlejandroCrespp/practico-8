@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(float v[], int n);
+void mostrar(float v[], int n);
+float buscarMinimo(float v[], int n);
+
+int main() {
+    int n;
+    float v[100];
+    
+    cout << "Ingrese la cantidad de elementos (n > 0): ";
+    cin >> n;
+    
+    if (n > 0 && n <= 100) {
+        leer(v, n);
+        mostrar(v, n);
+        cout << "El valor minimo es: " << buscarMinimo(v, n) << endl;
+    } else {
+        cout << "Cantidad no valida." << endl;
+    }
+    return 0;
+}
+
+// Implementaciones
+void leer(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese el valor " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(float v[], int n) {
+    cout << "Vector: [ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+float buscarMinimo(float v[], int n) {
+    float min = v[0];
+    for (int i = 1; i < n; i++) {
+        if (v[i] < min) {
+            min = v[i];
+        }
+    }
+    return min;
+}
