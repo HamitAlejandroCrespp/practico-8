@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(int v[], int n);
+void mostrar(int v[], int n);
+bool existe(int v[], int tam, int valor);
+int eliminarDuplicados(int A[], int n, int B[]);
+
+int main() {
+    int n;
+    int A[100], B[100];
+
+    cout << "Ingrese la cantidad de elementos: ";
+    cin >> n;
+
+    if (n > 0 && n <= 100) {
+        leer(A, n);
+        cout << "Vector Original A: "; mostrar(A, n);
+
+        int tamB = eliminarDuplicados(A, n, B);
+
+        cout << "Vector Sin Duplicados B: "; mostrar(B, tamB);
+        cout << "Cantidad de elementos validos en B: " << tamB << endl;
+    } else {
+        cout << "Cantidad invalida." << endl;
+    }
+    return 0;
+}
+
+void leer(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese elemento " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(int v[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+bool existe(int v[], int tam, int valor) {
+    for (int i = 0; i < tam; i++) {
+        if (v[i] == valor) return true;
+    }
+    return false;
+}
+
+int eliminarDuplicados(int A[], int n, int B[]) {
+    int tamB = 0;
+    for (int i = 0; i < n; i++) {
+        if (!existe(B, tamB, A[i])) {
+            B[tamB] = A[i];
+            tamB++;
+        }
+    }
+    return tamB;
+}
