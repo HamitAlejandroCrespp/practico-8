@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(float v[], int n);
+void mostrar(float v[], int n);
+float valorAbsoluto(float x);
+void calcularMayorDiferencia(float A[], int n, float &maxDif, float &elem1, float &elem2);
+
+int main() {
+    int n;
+    float A[100];
+
+    cout << "Ingrese la cantidad de elementos (n >= 2): ";
+    cin >> n;
+
+    if (n >= 2 && n <= 100) {
+        leer(A, n);
+        mostrar(A, n);
+
+        float maxDif, elem1, elem2;
+        calcularMayorDiferencia(A, n, maxDif, elem1, elem2);
+
+        cout << "La mayor diferencia absoluta es: " << maxDif << endl;
+        cout << "Producida por los elementos: " << elem1 << " y " << elem2 << endl;
+    } else {
+        cout << "Cantidad invalida (debe ser n >= 2)." << endl;
+    }
+    return 0;
+}
+
+void leer(float v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese el valor " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(float v[], int n) {
+    cout << "Vector: [ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+float valorAbsoluto(float x) {
+    if (x < 0) return -x;
+    return x;
+}
+
+void calcularMayorDiferencia(float A[], int n, float &maxDif, float &elem1, float &elem2) {
+    maxDif = valorAbsoluto(A[1] - A[0]);
+    elem1 = A[0];
+    elem2 = A[1];
+
+    for (int i = 1; i < n - 1; i++) {
+        float dif = valorAbsoluto(A[i + 1] - A[i]);
+        if (dif > maxDif) {
+            maxDif = dif;
+            elem1 = A[i];
+            elem2 = A[i + 1];
+        }
+    }
+}
