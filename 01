@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(int v[], int n);
+void mostrar(int v[], int n);
+int buscarMaximo(int v[], int n);
+
+int main() {
+    int n;
+    int v[100]; // Arreglo con tamaño máximo fijo por simplicidad
+    
+    cout << "Ingrese la cantidad de elementos (n > 0): ";
+    cin >> n;
+    
+    if (n > 0 && n <= 100) {
+        leer(v, n);
+        mostrar(v, n);
+        int maximo = buscarMaximo(v, n);
+        cout << "El valor maximo es: " << maximo << endl;
+    } else {
+        cout << "Cantidad no valida." << endl;
+    }
+    return 0;
+}
+
+// Implementaciones
+void leer(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese el valor " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(int v[], int n) {
+    cout << "Vector: [ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+int buscarMaximo(int v[], int n) {
+    int max = v[0];
+    for (int i = 1; i < n; i++) {
+        if (v[i] > max) {
+            max = v[i];
+        }
+    }
+    return max;
+}
