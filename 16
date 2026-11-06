@@ -1,0 +1,126 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Prototipos
+void registrarAlumno(string nombres[], float notas[], int &n, int maxCapacidad);
+void listarAlumnos(string nombres[], float notas[], int n);
+void ordenarAlfabeticamente(string nombres[], float notas[], int n);
+void mostrarNotaMasAlta(string nombres[], float notas[], int n);
+float calcularPromedio(float notas[], int n);
+
+int main() {
+    string nombres[100];
+    float notas[100];
+    int n = 0;
+    int opcion;
+
+    do {
+        cout << "\n--- MENU DE GESTION DE ALUMNOS ---" << endl;
+        cout << "1) Registrar alumno y nota" << endl;
+        cout << "2) Listar alumnos" << endl;
+        cout << "3) Ordenar alfabeticamente por nombre" << endl;
+        cout << "4) Mostrar alumno(s) con la nota mas alta" << endl;
+        cout << "5) Calcular el promedio de notas" << endl;
+        cout << "6) Salir" << endl;
+        cout << "Elija una opcion: ";
+        cin >> opcion;
+
+        if (opcion == 1) {
+            registrarAlumno(nombres, notas, n, 100);
+        } else if (opcion == 2) {
+            listarAlumnos(nombres, notas, n);
+        } else if (opcion == 3) {
+            ordenarAlfabeticamente(nombres, notas, n);
+        } else if (opcion == 4) {
+            mostrarNotaMasAlta(nombres, notas, n);
+        } else if (opcion == 5) {
+            if (n > 0) {
+                cout << "Promedio general: " << calcularPromedio(notas, n) << endl;
+            } else {
+                cout << "No hay alumnos registrados." << endl;
+            }
+        }
+    } while (opcion != 6);
+
+    cout << "Saliendo del programa..." << endl;
+    return 0;
+}
+
+void registrarAlumno(string nombres[], float notas[], int &n, int maxCapacidad) {
+    if (n < maxCapacidad) {
+        cout << "Nombre del alumno: ";
+        cin >> nombres[n];
+        do {
+            cout << "Nota (0 a 100): ";
+            cin >> notas[n];
+            if (notas[n] < 0 || notas[n] > 100) {
+                cout << "Nota invalida." << endl;
+            }
+        } while (notas[n] < 0 || notas[n] > 100);
+        n++;
+        cout << "Alumno registrado con exito." << endl;
+    } else {
+        cout << "Capacidad maxima alcanzada." << endl;
+    }
+}
+
+void listarAlumnos(string nombres[], float notas[], int n) {
+    if (n == 0) {
+        cout << "Lista vacia." << endl;
+        return;
+    }
+    cout << "\n--- LISTA DE ALUMNOS ---" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << i + 1 << ". " << nombres[i] << " - " << notas[i] << endl;
+    }
+}
+
+void ordenarAlfabeticamente(string nombres[], float notas[], int n) {
+    if (n == 0) {
+        cout << "Lista vacia." << endl;
+        return;
+    }
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (nombres[j] > nombres[j + 1]) {
+                string auxNombre = nombres[j];
+                nombres[j] = nombres[j + 1];
+                nombres[j + 1] = auxNombre;
+
+                float auxNota = notas[j];
+                notas[j] = notas[j + 1];
+                notas[j + 1] = auxNota;
+            }
+        }
+    }
+    cout << "Lista ordenada alfabeticamente." << endl;
+}
+
+void mostrarNotaMasAlta(string nombres[], float notas[], int n) {
+    if (n == 0) {
+        cout << "Lista vacia." << endl;
+        return;
+    }
+    float maxNota = notas[0];
+    for (int i = 1; i < n; i++) {
+        if (notas[i] > maxNota) {
+            maxNota = notas[i];
+        }
+    }
+
+    cout << "Nota mas alta (" << maxNota << "):" << endl;
+    for (int i = 0; i < n; i++) {
+        if (notas[i] == maxNota) {
+            cout << "- " << nombres[i] << endl;
+        }
+    }
+}
+
+float calcularPromedio(float notas[], int n) {
+    float suma = 0;
+    for (int i = 0; i < n; i++) {
+        suma += notas[i];
+    }
+    return suma / n;
+}
