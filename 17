@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void generarFibonacci(long long fib[], int n);
+void mostrar(long long fib[], int n);
+
+int main() {
+    int n;
+    long long fib[100]; // long long evita desbordamientos rapidos
+
+    cout << "Ingrese n terminos de Fibonacci a generar (1 <= n <= 90): ";
+    cin >> n;
+
+    if (n > 0 && n <= 90) {
+        generarFibonacci(fib, n);
+        cout << "Serie de Fibonacci: ";
+        mostrar(fib, n);
+    } else {
+        cout << "Cantidad fuera de rango valido para evitar desbordamiento." << endl;
+    }
+    return 0;
+}
+
+void generarFibonacci(long long fib[], int n) {
+    if (n >= 1) fib[0] = 0;
+    if (n >= 2) fib[1] = 1;
+
+    for (int i = 2; i < n; i++) {
+        fib[i] = fib[i - 1] + fib[i - 2];
+    }
+}
+
+void mostrar(long long fib[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << fib[i] << " ";
+    }
+    cout << "]" << endl;
+}
