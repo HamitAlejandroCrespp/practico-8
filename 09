@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(int v[], int n);
+void mostrar(int v[], int n);
+void concatenar(int A[], int n, int B[], int m, int C[]);
+
+int main() {
+    int n, m;
+    int A[100], B[100], C[200];
+
+    cout << "Ingrese el tamaño del primer vector A: ";
+    cin >> n;
+    leer(A, n);
+
+    cout << "Ingrese el tamaño del segundo vector B: ";
+    cin >> m;
+    leer(B, m);
+
+    concatenar(A, n, B, m, C);
+
+    cout << "Vector A: "; mostrar(A, n);
+    cout << "Vector B: "; mostrar(B, m);
+    cout << "Vector C (Concatenado): "; mostrar(C, n + m);
+
+    return 0;
+}
+
+void leer(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese elemento " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(int v[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+void concatenar(int A[], int n, int B[], int m, int C[]) {
+    for (int i = 0; i < n; i++) {
+        C[i] = A[i];
+    }
+    for (int j = 0; j < m; j++) {
+        C[n + j] = B[j];
+    }
+}
