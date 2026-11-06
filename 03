@@ -9,40 +9,39 @@ float calcularPromedio(float v[], int n);
 int main() {
     int n;
     float v[100];
-    
-    cout << "Ingrese cantidad de numeros reales (n > 0): ";
+
+    cout << "Ingrese la cantidad de elementos (n > 0): ";
     cin >> n;
-    
+
     if (n > 0 && n <= 100) {
         leer(v, n);
         mostrar(v, n);
         cout << "El promedio es: " << calcularPromedio(v, n) << endl;
     } else {
-        cout << "Cantidad no valida." << endl;
+        cout << "Cantidad invalida." << endl;
     }
     return 0;
 }
 
-// Implementaciones
 void leer(float v[], int n) {
     for (int i = 0; i < n; i++) {
-        cout << "Valor " << i + 1 << ": ";
+        cout << "Ingrese el valor " << i + 1 << ": ";
         cin >> v[i];
     }
 }
 
 void mostrar(float v[], int n) {
-    cout << "Elementos: ";
+    cout << "Vector: [ ";
     for (int i = 0; i < n; i++) {
         cout << v[i] << " ";
     }
-    cout << endl;
+    cout << "]" << endl;
 }
 
 float calcularPromedio(float v[], int n) {
     float suma = 0;
     for (int i = 0; i < n; i++) {
-        suma = suma + v[i];
+        suma += v[i];
     }
     return suma / n;
 }
