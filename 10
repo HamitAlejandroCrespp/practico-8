@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+// Prototipos
+void leer(int v[], int n);
+void mostrar(int v[], int n);
+void intercalarOrdenados(int A[], int n, int B[], int m, int C[]);
+
+int main() {
+    int n, m;
+    int A[100], B[100], C[200];
+
+    cout << "Ingrese tamaño del vector A (ingrese los datos ORDENADOS): ";
+    cin >> n;
+    leer(A, n);
+
+    cout << "Ingrese tamaño del vector B (ingrese los datos ORDENADOS): ";
+    cin >> m;
+    leer(B, m);
+
+    intercalarOrdenados(A, n, B, m, C);
+
+    cout << "Vector A: "; mostrar(A, n);
+    cout << "Vector B: "; mostrar(B, m);
+    cout << "Vector C Intercalado y Ordenado: "; mostrar(C, n + m);
+
+    return 0;
+}
+
+void leer(int v[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << "Ingrese elemento ordenado " << i + 1 << ": ";
+        cin >> v[i];
+    }
+}
+
+void mostrar(int v[], int n) {
+    cout << "[ ";
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
+    }
+    cout << "]" << endl;
+}
+
+void intercalarOrdenados(int A[], int n, int B[], int m, int C[]) {
+    int i = 0, j = 0, k = 0;
+
+    while (i < n && j < m) {
+        if (A[i] <= B[j]) {
+            C[k] = A[i];
+            i++;
+        } else {
+            C[k] = B[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n) {
+        C[k] = A[i];
+        i++;
+        k++;
+    }
+
+    while (j < m) {
+        C[k] = B[j];
+        j++;
+        k++;
+    }
+}
